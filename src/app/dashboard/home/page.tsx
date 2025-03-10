@@ -17,6 +17,8 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
 import { PieChart, Pie,  Cell, } from "recharts";
+
+
 const chartConfig = {
   returns: {
     label: "Retours",
@@ -29,7 +31,7 @@ const dashboardData = {
     {
       id: "totalReturns",
       name: "Nombre total de retours initiés",
-      value: 123,
+      value: "123 retours",
       icon: <Truck className="h-6 w-6" />,
     }, // Nombre total de retours initiés
     {
@@ -41,7 +43,7 @@ const dashboardData = {
     {
       id: "averageProcessingTime",
       name: "Temps moyen de traitement des retours",
-      value: "2 jours",
+      value: "2,4 jours",
       icon: <Timer className="h-6 w-6" />,
     }, // Temps moyen de traitement
     // {

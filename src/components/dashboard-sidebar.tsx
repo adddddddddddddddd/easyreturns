@@ -1,11 +1,5 @@
-import {
-  Rows4,
-  Search,
-  Settings,
-  LayoutDashboard,
-  Bell,
-  Square,
-} from "lucide-react";
+import { Rows4, Search, Settings, LayoutDashboard, Square } from "lucide-react";
+import Link from 'next/link'
 
 import {
   Sidebar,
@@ -20,6 +14,8 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { NavUser } from "@/components/nav-user";
+import { SearchComponent } from "@/components/search-component";
+
 // Menu items.
 const items = [
   {
@@ -29,17 +25,17 @@ const items = [
   },
   {
     title: "Dashboard",
-    url: "#",
+    url: "/dashboard/home",
     icon: LayoutDashboard,
   },
   {
     title: "Gestion",
-    url: "#",
+    url: "/dashboard/manage",
     icon: Rows4,
   },
   {
     title: "Paramètres",
-    url: "#",
+    url: "/dashboard/settings",
     icon: Settings,
   },
 ];
@@ -48,7 +44,7 @@ const user = {
   email: "m@example.com",
   avatar: "/avatars/shadcn.jpg",
 };
-export function AppSidebar() {
+export function AdminSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
@@ -73,10 +69,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
