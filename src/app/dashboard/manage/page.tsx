@@ -154,6 +154,25 @@ const data: Return[] = [
   },
 ];
 
+import { Badge } from "@/components/ui/badge";
+
+<div className="flex items-center gap-3 flex-wrap">
+  <Badge className="bg-amber-600/10 dark:bg-amber-600/20 hover:bg-amber-600/10 text-amber-500 shadow-none rounded-full">
+    <div className="h-1.5 w-1.5 rounded-full bg-amber-500 mr-2" />
+    Processing
+  </Badge>
+  <Badge className="bg-amber-600/10 dark:bg-amber-600/20 hover:bg-amber-600/10 text-amber-500 shadow-none rounded-full">
+    <div className="h-1.5 w-1.5 rounded-full bg-amber-500 mr-2" />
+    Pending
+  </Badge>
+  <Badge className="bg-red-600/10 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full">
+    <div className="h-1.5 w-1.5 rounded-full bg-red-500 mr-2" /> Failed
+  </Badge>
+  <Badge className="bg-emerald-600/10 dark:bg-emerald-600/20 hover:bg-emerald-600/10 text-emerald-500 shadow-none rounded-full">
+    <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 mr-2" /> Success
+  </Badge>
+</div>;
+
 export const columns: ColumnDef<Return>[] = [
   {
     id: "select",
@@ -180,10 +199,51 @@ export const columns: ColumnDef<Return>[] = [
   {
     accessorKey: "status",
     header: "Statut",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
+    cell: ({ row }) => {
+      const status = row.getValue("status");
+      let badge;
+
+      switch (status) {
+        case "success":
+          badge = (
+            <Badge className="bg-emerald-600/10 dark:bg-emerald-600/20 hover:bg-emerald-600/10 text-emerald-500 shadow-none rounded-full">
+              <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 mr-2" />{" "}
+              Success
+            </Badge>
+          );
+          break;
+        case "pending":
+          badge = (
+            <Badge className="bg-amber-600/10 dark:bg-amber-600/20 hover:bg-amber-600/10 text-amber-500 shadow-none rounded-full">
+              <div className="h-1.5 w-1.5 rounded-full bg-amber-500 mr-2" />{" "}
+              Pending
+            </Badge>
+          );
+          break;
+        case "processing":
+          badge = (
+            <Badge className="bg-amber-600/10 dark:bg-amber-600/20 hover:bg-amber-600/10 text-amber-500 shadow-none rounded-full">
+              <div className="h-1.5 w-1.5 rounded-full bg-amber-500 mr-2" />{" "}
+              Processing
+            </Badge>
+          );
+          break;
+        case "failed":
+          badge = (
+            <Badge className="bg-red-600/10 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full">
+              <div className="h-1.5 w-1.5 rounded-full bg-red-500 mr-2" />{" "}
+              Failed
+            </Badge>
+          );
+          break;
+        default:
+          badge = <div className="capitalize">{row.getValue("status")}</div>;
+      }
+
+      return <div className="capitalize">{badge}</div>;
+    },
   },
+
   {
     accessorKey: "email",
     header: ({ column }) => {
@@ -253,8 +313,11 @@ export const columns: ColumnDef<Return>[] = [
               Copy return ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem><Link href={`/dashboard/manage/return/${payment.id}`}>View customer</Link></DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/dashboard/manage/return/${payment.id}`}>
+                Accéder à la demande de retour
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

@@ -4,4 +4,12 @@ const nextConfig: NextConfig = {
   /* config options here */
 };
 
+module.exports = {
+  images: {
+    domains: ['placehold.co'],
+    dangerouslyAllowSVG: true,
+
+  },
+};
+
 export default nextConfig;
