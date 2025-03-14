@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Truck, Timer, ChartSpline } from "lucide-react";
 import {
@@ -16,7 +15,7 @@ import {
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
-import { PieChart, Pie,  Cell, } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 
 
 const chartConfig = {
@@ -99,6 +98,7 @@ const dashboardData = {
 };
 
 export default function DashboardHome() {
+
   return (
     <div className="max-w-screen-lg mx-auto  grid grid-rows-4 grid-cols-12 gap-4 w-full items-center">
       <section className="border-grid pb-4 col-span-12">

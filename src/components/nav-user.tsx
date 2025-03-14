@@ -1,4 +1,6 @@
-"use client"
+"use client";
+
+import { useEffect, useState } from "react";
 
 import {
   BadgeCheck,
@@ -7,13 +9,10 @@ import {
   CreditCard,
   LogOut,
   Sparkles,
-} from "lucide-react"
+  Truck,
+} from "lucide-react";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,25 +21,42 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
-
+} from "@/components/ui/sidebar";
+import { createClient } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
+import { Button } from "./ui/button";
 export function NavUser({
   user,
 }: {
   user: {
-    name: string
-    email: string
-    avatar: string
-  }
+    name: string;
+    email: string;
+    avatar: string;
+  };
 }) {
-  const { isMobile } = useSidebar()
-
+  const { isMobile } = useSidebar();
+  const supabase = createClient();
+  const [email, setEmail] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      if (error) {
+        console.log(error);
+        redirect("/login");
+        throw error;
+      }
+      if (data) {
+        setEmail(data?.user?.email ?? null);
+      }
+    };
+    fetchData();
+  }, [supabase]);
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -56,7 +72,7 @@ export function NavUser({
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate text-xs">{email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -75,7 +91,7 @@ export function NavUser({
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate text-xs">{email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
@@ -100,15 +116,23 @@ export function NavUser({
                 <Bell />
                 Notifications
               </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Truck />
+                My returns
+              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <LogOut />
-              Log out
+              <form action="/auth/signout" method="post">
+                <Button type="submit">
+                  <LogOut />
+                  Log out
+                </Button>
+              </form>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

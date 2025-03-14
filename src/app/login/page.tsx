@@ -29,7 +29,7 @@ export default function LoginPage() {
       </div>
       <div className="relative hidden bg-muted lg:block">
         <Image
-          src="https://placehold.co/600x400/png"
+          src="/auth/hand-drawn-doodle-return-package-or-order-illustration-vector.jpg"
           alt="Image"
           width={600}
           height={400}
