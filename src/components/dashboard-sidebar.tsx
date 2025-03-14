@@ -33,17 +33,17 @@ const items = [
   },
   {
     title: "Dashboard",
-    url: "/dashboard/home",
+    url: "/app/admin-dashboard",
     icon: LayoutDashboard,
   },
   {
     title: "Gestion",
-    url: "/dashboard/manage",
+    url: "/app/admin-dashboard/manage",
     icon: Rows4,
   },
   {
     title: "Paramètres",
-    url: "/dashboard/settings",
+    url: "/app/admin-dashboard/settings",
     icon: Settings,
   },
 ];

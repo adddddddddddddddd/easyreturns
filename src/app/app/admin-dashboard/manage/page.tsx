@@ -314,7 +314,7 @@ export const columns: ColumnDef<Return>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href={`/dashboard/manage/return/${payment.id}`}>
+              <Link href={`/app/admin-dashboard/manage/return/${payment.id  }`}>
                 Accéder à la demande de retour
               </Link>
             </DropdownMenuItem>

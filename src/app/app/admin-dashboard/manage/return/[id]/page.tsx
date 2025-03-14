@@ -14,6 +14,8 @@ import {
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { User } from "lucide-react";
+import { Timeline } from "@/components/ui/timeline";
 
 interface Return {
   id: string;
@@ -72,8 +74,14 @@ const getStatusBadge = (status: string) => {
   }
 };
 
+const items = [
+  {
+
+  }
+]
+
 export default async function ReturnPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+  const { id } = await params;
   const customerReturn = returns.find((p) => p.id === id);
 
   if (!customerReturn) {
@@ -82,10 +90,19 @@ export default async function ReturnPage({ params }: { params: { id: string } })
 
   return (
     <div className="max-w-screen-lg mx-auto w-full p-4">
+      <Card>
+        <CardHeader className="">
+          <CardTitle className="flex font-bold items-center">
+            <User className="mx-2"/>
+          Applicant Details
+
+          </CardTitle>
+        </CardHeader>
+      </Card>
       <Card className="w-full">
         {/* En-tête */}
         <CardHeader>
-          <CardTitle className="text-center">Retour {customerReturn.id}</CardTitle>
+          <CardTitle className="">Retour {customerReturn.id}</CardTitle>
           <CardDescription className="text-center">
             {getStatusBadge(customerReturn.status)}
             <p>Demandé le {customerReturn.dateOfRequest}</p>
@@ -177,6 +194,7 @@ export default async function ReturnPage({ params }: { params: { id: string } })
           <Button>Modifier</Button>
         </CardFooter>
       </Card>
+      <Timeline items={items}></Timeline>
     </div>
   );
 }

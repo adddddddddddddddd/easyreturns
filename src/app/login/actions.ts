@@ -22,7 +22,7 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/dashboard/home");
+  redirect("/app");
 }
 
 export async function signup(formData: FormData) {
@@ -42,7 +42,7 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/client-dashboard");
+  redirect("/app");
 }
 
 export async function sendResetPasswordEmail(prev: string, formData: FormData) {
