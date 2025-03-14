@@ -26,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 // import { PhoneInput } from '@/components/ui/phone-input'
 
+import { signup } from "@/app/login/actions";
 // Define validation schema using Zod
 const formSchema = z
   .object({
@@ -33,7 +34,7 @@ const formSchema = z
       .string()
       .min(2, { message: "Name must be at least 2 characters long" }),
     email: z.string().email({ message: "Invalid email address" }),
-    phone: z.string().min(10, { message: "Phone number must be valid" }),
+    // phone: z.string().min(10, { message: "Phone number must be valid" }),
     password: z
       .string()
       .min(6, { message: "Password must be at least 6 characters long" })
@@ -51,25 +52,14 @@ export function RegisterForm() {
     defaultValues: {
       name: "",
       email: "",
-      phone: "",
+      // phone: "",
       password: "",
       confirmPassword: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      // Assuming an async registration function
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
-    } catch (error) {
-      console.error("Form submission error", error);
-      toast.error("Failed to submit the form. Please try again.");
-    }
+  const handleSubmit = () => {
+    toast("Check your emails to confirm your registration")
   }
 
   return (
@@ -85,7 +75,7 @@ export function RegisterForm() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
               <div className="grid gap-4">
                 {/* Name Field */}
                 <FormField
@@ -187,7 +177,7 @@ export function RegisterForm() {
                   )}
                 />
 
-                <Button type="submit" className="w-full">
+                <Button formAction={signup} type="submit" className="w-full">
                   Register
                 </Button>
               </div>
