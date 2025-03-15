@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
 
 module.exports = {
   images: {
-    domains: ['placehold.co'],
+    domains: ['placehold.co', "shadcnblocks.com", "www.shadcnblocks.com"],
     dangerouslyAllowSVG: true,
 
   },
