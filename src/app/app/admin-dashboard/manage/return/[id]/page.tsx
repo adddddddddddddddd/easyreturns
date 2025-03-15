@@ -12,11 +12,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { User } from "lucide-react";
+import { IterationCcw, User, Notebook, Quote, Camera } from "lucide-react";
 import { Timeline } from "@/components/ui/timeline";
 import { TimelineItemSmallText } from "@/components/ui/timeline";
+import { Textarea } from "@/components/ui/textarea";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface TimelinePropsItem {
   title: string;
@@ -232,6 +233,16 @@ const items: TimelinePropsItem[] = [
     ),
   },
 ];
+const userMockData = {
+  nom: "Dupont",
+  prenom: "Jean",
+  adresse: "12 rue des Lilas",
+  ville: "Paris",
+  code_postal: "75015",
+  pays: "France",
+  telephone_mobile: "+33 6 12 34 56 78",
+  date_creation_compte: "2023-05-14T10:30:00Z",
+};
 
 export default async function ReturnPage({
   params,
@@ -246,123 +257,286 @@ export default async function ReturnPage({
   }
 
   return (
-    <div className="max-w-screen-lg mx-auto w-full p-4 grid grid-cols-12 gap-4">
-      <div className="col-span-9">
-        <Card>
-          <CardHeader className="">
-            <CardTitle className="flex font-bold items-center">
-              <User className="mx-2" />
-              Applicant Details
+    <div className="max-w-screen-lg mx-auto grid grid-cols-12 grid-rows-13 w-full p-4 ">
+      <section className="col-span-12 grid grid-cols-12 row-span-1">
+        <Card className="shadow-none border-none col-span-9 ">
+          <CardHeader>
+            <CardTitle>
+              <CardTitle className=" text-xl flex justify-between items-center">
+                <span className="flex flex-col justify-center font-bold">
+                  <div className="flex items-center">
+                    <p className="">Retour {customerReturn.id} </p>
+                    <div className="ml-4 pb-1.5">
+                      {" "}
+                      {getStatusBadge(customerReturn.status)}
+                    </div>
+                  </div>
+                  <Label className="font-medium opacity-50">
+                    {" "}
+                    Demandé le {customerReturn.dateOfRequest}
+                  </Label>
+                </span>
+                <span className="flex flex-col justify-center">
+                  <p className="font-bold ml-auto pb-0.5">
+                    {customerReturn.amount}€
+                  </p>
+                  <Label className="ml-auto font-medium opacity-50">
+                    Return cost
+                  </Label>
+                </span>
+              </CardTitle>
+              <CardDescription className=""></CardDescription>
             </CardTitle>
           </CardHeader>
         </Card>
-        <Card className="w-full">
-          {/* En-tête */}
+        <Card className="col-span-3 shadow-none border-none">
           <CardHeader>
-            <CardTitle className="">Retour {customerReturn.id}</CardTitle>
-            <CardDescription className="text-center">
-              {getStatusBadge(customerReturn.status)}
-              <p>Demandé le {customerReturn.dateOfRequest}</p>
-            </CardDescription>
+            <CardTitle className="font-bold text-xl">Activity</CardTitle>
           </CardHeader>
-          <Separator />
-          {/* Informations Principales */}
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex flex-col items-center w-full">
-                <Label>Email :</Label>
-                <p className="opacity-75">{customerReturn.email}</p>
-              </div>
-              <div className="flex flex-col items-center w-full">
-                <Label>Montant :</Label>
-                <p className="opacity-75">{customerReturn.amount}€</p>
-              </div>
-            </div>
-            <Separator className="my-4" />
-            {/* Détails du Produit */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex flex-col items-center w-full">
-                <Label>Produit concerné :</Label>
-                <p className="opacity-75">Produit A</p>
-              </div>
-              <div className="flex flex-col items-center w-full">
-                <Label>Référence :</Label>
-                <p className="opacity-75">
-                  {Math.random().toString(36).substring(2, 10).toUpperCase()}
-                </p>
-              </div>
-            </div>
-            <Separator className="my-4" />
-            {/* Motif et Commentaire */}
-            <div className="flex flex-col items-center w-full">
-              <Label>Motif du retour :</Label>
-              <p className="opacity-75">Taille inappropriée</p>
-            </div>
-            <div className="flex flex-col mt-4 items-center w-full">
-              <Label>Commentaire :</Label>
-              <p className="opacity-50 text-sm">
-                Trop petit, souhaité plus grand
-              </p>
-            </div>
-            <Separator className="my-4" />
-            {/* Historique / Timeline */}
-            <div className="flex flex-col items-center w-full">
-              <div>
-                <Label>Historique / Timeline :</Label>
-                <ul className="list-disc pl-6 text-sm text-muted-foreground">
-                  <li>01/02/2025 : Demande créée</li>
-                  <li>02/02/2025 : Notification envoyée</li>
-                  <li>03/02/2025 : Retour en cours de traitement</li>
-                </ul>
-              </div>
-            </div>
-            <Separator className="my-4" />
-            {/* Pièces Jointes */}
-            <div className="flex flex-col items-center w-full">
-              <Label>Pièces Jointes :</Label>
-              <div className="flex gap-2 mt-2">
-                <Image
-                  src="https://placehold.co/600x400"
-                  alt="Image 1"
-                  width={600}
-                  height={400}
-                  className="h-16 w-16 object-cover rounded-md"
-                />
-                <Image
-                  src="https://placehold.co/600x400"
-                  width={600}
-                  height={400}
-                  alt="Image 2"
-                  className="h-16 w-16 object-cover rounded-md"
-                />
-              </div>
-            </div>
-            <Separator className="my-4" />
-            {/* Notes Internes */}
-            <div className="flex flex-col">
-              <Label>Notes Internes :</Label>
-              <p className="text-sm text-muted-foreground">
-                Vérifier la conformité du produit retourné.
-              </p>
-            </div>
-          </CardContent>
-          {/* Footer / Actions */}
-          <CardFooter className="flex justify-between">
-            <Link href="/dashboard/manage">
-              <Button variant="outline">Retour</Button>
-            </Link>
-            <Button>Modifier</Button>
-          </CardFooter>
         </Card>
-      </div>
-      <div className="col-span-3">
-        <Timeline
-          items={items}
-          activeItem={2}
-          bulletSize={15}
-          lineSize={2}
-        ></Timeline>
-      </div>
+      </section>
+
+      <section className="w-full grid grid-cols-12 col-span-12 row-span-12 gap-4">
+        <div className="col-span-9 grid grid-cols-9 gap-4">
+          <Card className="col-span-9">
+            <CardHeader>
+              <CardTitle className="flex font-bold items-center">
+                <User className="mr-2" />
+                Applicant Details
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-2 grid-row-1">
+              <div className="grid-cols-3 row-span-1 grid-rows-5 grid col-span-1 gap-4">
+                <div className="grid col-span-1 row-span-1">
+                  <div className="opacity-66 font-medium">LAST NAME</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">{userMockData.nom}</div>
+                </div>
+
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">FIRST NAME</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">{userMockData.prenom}</div>
+                </div>
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">EMAIL</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">{customerReturn.email}</div>
+                </div>
+
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">PHONE</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">
+                    {userMockData.telephone_mobile}
+                  </div>
+                </div>
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">CREATED</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">
+                    {userMockData.date_creation_compte}
+                  </div>
+                </div>
+              </div>
+              <div className="grid-cols-3 row-span-1 grid-rows-5 grid col-span-1 gap-4">
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">ADRESS</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">{userMockData.adresse}</div>
+                </div>
+
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">CITY</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">{userMockData.ville}</div>
+                </div>
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">CODE POSTAL</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">{userMockData.code_postal}</div>
+                </div>
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">COUNTRY</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">{userMockData.pays}</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="col-span-9">
+            <CardHeader>
+              <CardTitle className="flex font-bold items-center">
+                <IterationCcw className="mr-2" />
+                Informations on the Return
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-2 grid-row-1">
+              <div className="grid-cols-3 row-span-1 grid-rows-3 grid col-span-1 gap-4">
+                <div className="grid col-span-1 row-span-1">
+                  <div className="opacity-66 font-medium">AMOUNT</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-bold">{customerReturn.amount}€</div>
+                </div>
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">PRODUCT</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">PRODUCT A</div>
+                </div>
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66 over">REASON</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">Taille inappropriée</div>
+                </div>
+              </div>
+              <div className="grid-cols-3 row-span-1 grid-rows-3 grid col-span-1 gap-4">
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">CARRIER</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">CHRONOPOST</div>
+                </div>
+
+                <div className="grid col-span-1 row-span-1">
+                  <div className="font-medium opacity-66">REF</div>
+                </div>
+                <div className="grid col-span-2">
+                  <div className="font-medium">
+                    {Math.random().toString(36).substring(2, 10).toUpperCase()}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="col-span-9">
+            <CardHeader>
+              <CardTitle className="flex font-bold items-center">
+                <Camera className="mr-2" />
+                Photos
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-2 grid-row-1">
+              <div className="grid col-span-2 grid-cols-3 gap-4">
+                <Card className="border-none shadow-none p-0">
+                  <CardContent className="aspect-square p-0  border-2 rounded-xl">
+                    {" "}
+                    <Image
+                      src="https://placehold.co/600x400"
+                      width={600}
+                      height={400}
+                      alt="Image 2"
+                      className="h-full w-full object-cover rounded-md"
+                    />
+                  </CardContent>
+                </Card>
+                <Card className="border-none shadow-none p-0">
+                  <CardContent className="aspect-square p-0 border-2 rounded-xl">
+                    {" "}
+                    <Image
+                      src="https://placehold.co/600x400"
+                      width={600}
+                      height={400}
+                      alt="Image 2"
+                      className="h-full w-full object-cover rounded-md"
+                    />
+                  </CardContent>
+                </Card>{" "}
+                <Card className="border-none shadow-none p-0">
+                  <CardContent className="aspect-square p-0 border-2 rounded-xl">
+                    {" "}
+                    <Image
+                      src="https://placehold.co/600x400"
+                      width={600}
+                      height={400}
+                      alt="Image 2"
+                      className="h-full w-full object-cover rounded-md"
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="col-span-9">
+            <CardHeader>
+              <CardTitle className="flex font-bold items-center">
+                <Camera className="mr-2" />
+                User comment
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="">
+              <Card className="relative w-full max-w-md m-auto bg-muted/70 shadow-none border-none">
+                <Quote className="absolute top-3 right-2 h-16 w-16 text-foreground/10 stroke-[1.5px]" />
+                <CardHeader className="py-5">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-12 w-12">
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[15px] leading-none font-semibold">
+                        shadcn
+                      </span>
+                      <span className="text-sm leading-none text-muted-foreground">
+                        @shadcn
+                      </span>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-[15px] text-muted-foreground">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Duis ullamcorper, augue at commodo interdum, erat dolor
+                    egestas eros, eu finibus turpis nunc at purus. Sed elementum
+                    rutrum nibh, a egestas turpis porttitor eu.
+                  </p>
+                </CardContent>
+              </Card>
+            </CardContent>
+          </Card>
+        </div>
+        <div className="col-span-3 flex flex-col items-center">
+          <Timeline
+            items={items}
+            activeItem={2}
+            bulletSize={15}
+            lineSize={2}
+          ></Timeline>
+          <Card className="mt-4">
+            <CardHeader>
+              <CardTitle className="flex font-bold items-center">
+                <Notebook className="mr-2" />
+                Notes
+              </CardTitle>
+              <CardDescription>
+                Enter your notes about this client
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {" "}
+              <Textarea></Textarea>
+            </CardContent>
+            <CardFooter className="flex">
+              
+              <Button className="ml-auto">Enregistrer</Button>
+            </CardFooter>{" "}
+          </Card>
+        </div>
+      </section>
+      <Link href="/dashboard/manage">
+                <Button variant="outline" className="mt-4">Retour</Button>
+              </Link>
     </div>
   );
 }

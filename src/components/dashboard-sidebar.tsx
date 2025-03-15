@@ -1,6 +1,6 @@
 import {
   Rows4,
-  Search,
+  // Search,
   Settings,
   LayoutDashboard,
 
@@ -26,11 +26,11 @@ import { TeamSwitcher } from "@/components/team-switcher";
 
 // Menu items.
 const items = [
-  {
-    title: "Recherche",
-    url: "#",
-    icon: Search,
-  },
+  // {
+  //   title: "Recherche",
+  //   url: "#",
+  //   icon: Search,
+  // },
   {
     title: "Dashboard",
     url: "/app/admin-dashboard",

@@ -35,11 +35,12 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "./ui/textarea";
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import { Store, House, CircleCheck } from "lucide-react";
+import { Store, CircleCheck, Truck } from "lucide-react";
+import Link from "next/link";
 
 const ReturnMethod = {
   dropOff: { label: "Déposer en magasin", Icon: Store },
-  pickup: { label: "Ramasser à domicile", Icon: House },
+  pickup: { label: "Déposer en Point Relais", Icon: Truck },
 } as const;
 const formSchema = z.object({
   productId: z.string().min(1, "Veuillez sélectionner un produit."),
@@ -87,7 +88,7 @@ export function PortalForm() {
 
   return (
     <>
-      <Card className="w-[350px] m-auto">
+      <Card className="w-full max-w-md m-auto">
         <CardHeader>
           <CardTitle>Retournez votre produit</CardTitle>
           <CardDescription>
@@ -157,8 +158,7 @@ export function PortalForm() {
                       </Select>
                     </FormControl>
                     <FormDescription>
-                      Raison pour laquelle vous retourner le
-                      produit.
+                      Raison pour laquelle vous retourner le produit.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -210,7 +210,7 @@ export function PortalForm() {
                   <FormItem>
                     <FormLabel>Détails supplémentaires</FormLabel>
                     <FormControl>
-                        <Textarea placeholder="J'aurais aimé..." {...field}/>
+                      <Textarea placeholder="J'aurais aimé..." {...field} />
                     </FormControl>
                     <FormDescription>
                       Épliquez-nous votre décision.
@@ -219,8 +219,12 @@ export function PortalForm() {
                   </FormItem>
                 )}
               />
-              <CardFooter className="flex justify-center">
-                <Button type="submit">Valider le retour</Button>
+              <CardFooter className="flex justify-between">
+                <Link href="/">                <Button variant={"secondary"}>Retour</Button>
+                </Link>
+                <Link href="/portal/photos">
+                  <Button type="submit">Suivant</Button>
+                </Link>
               </CardFooter>
             </form>
           </Form>
