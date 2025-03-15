@@ -98,7 +98,7 @@ export const TimelineItemTitle = ({ children }: { children: ReactNode }) => {
 
 export const TimelineItem = ({
   children,
-  bullet,
+  // bullet,
   title,
   isLast,
   isActive,
@@ -122,7 +122,7 @@ export const TimelineItem = ({
       {...props}
     >
       <TimelineItemBullet lineSize={lineSize} bulletSize={bulletSize} isActive={isActiveBullet}>
-        {bullet}
+        {/* {bullet} */}
       </TimelineItemBullet>
       <TimelineItemTitle>{title}</TimelineItemTitle>
       {children}
