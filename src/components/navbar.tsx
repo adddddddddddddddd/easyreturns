@@ -58,7 +58,7 @@ interface Navbar1Props {
 const Navbar1 = ({
   logo = {
     url: "https://www.shadcnblocks.com",
-    src:"/auth/hand-drawn-doodle-return-package-or-order-illustration-vector.jpg",
+    src:"/images/return.png",
 
     alt: "logo",
     title: "Easy Returns",

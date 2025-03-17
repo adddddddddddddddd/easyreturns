@@ -22,7 +22,7 @@ export default function Home() {
           },
         }}
         image={{
-          src: "/auth/hand-drawn-doodle-return-package-or-order-illustration-vector.jpg",
+          src: "/images/hands-typing-package-thread-flipped.png",
           alt: "Hero image",
         }}
       ></Hero1>

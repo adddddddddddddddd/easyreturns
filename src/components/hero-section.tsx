@@ -79,8 +79,8 @@ const Hero1 = ({
           <Image
             src={image.src}
             alt={image.alt}
-            width={32}
-            height={32}
+            width={1920}
+            height={1080}
             className="max-h-96 w-full rounded-md object-cover"
           />
         </div>
