@@ -48,7 +48,7 @@ const items = [
   },
 ];
 const user = {
-  name: "shadcn",
+  name: "Easy",
   email: "m@example.com",
   avatar: "/avatars/shadcn.jpg",
 };

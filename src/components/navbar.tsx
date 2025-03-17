@@ -81,12 +81,12 @@ const Navbar1 = ({
 
   ],
   auth = {
-    login: { text: "Log in", url: "#" },
-    signup: { text: "Sign up", url: "#" },
+    login: { text: "Proposer une fonctionnalité", url: "#" },
+    signup: { text: "Demander une Démo Gratuite", url: "#" },
   },
 }: Navbar1Props) => {
   return (
-    <section className="py-4 w-full">
+    <section className="py-4 w-full max-w-6xl mx-auto">
       <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
@@ -103,7 +103,7 @@ const Navbar1 = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-4">
             <Button asChild variant="outline" size="sm">
               <a href={auth.login.url}>{auth.login.text}</a>
             </Button>

@@ -60,7 +60,7 @@ const Hero1 = ({
             <p className="mb-8 max-w-xl text-muted-foreground lg:text-xl">
               {description}
             </p>
-            <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
+            <div className="flex w-full flex-col justify-center gap-4 sm:flex-row lg:justify-start">
               {buttons.primary && (
                 <Button asChild className="w-full sm:w-auto">
                   <a href={buttons.primary.url}>{buttons.primary.text}</a>
